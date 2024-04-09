@@ -1,0 +1,126 @@
+.detail {
+  width: 80%;
+  display: flex;
+  flex-direction: row;
+  align-items: start;
+  justify-content: start;
+
+  &__sidebar {
+    max-width: 250px;
+
+    &__back {
+      color: #1e86ff;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: start;
+      text-decoration: none;
+      margin-bottom: 40px;
+      margin-top: 10px;
+
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+
+    &__contact {
+      width: 95%;
+      .contact__title {
+        font-weight: 700;
+        color: #b9bdcf;
+        margin-bottom: 20px;
+      }
+      a {
+        color: #1e86ff;
+      }
+    }
+  }
+
+  &__main {
+    &__header {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: flex-start;
+      margin-bottom: 10px;
+
+      .title {
+        font-family: 'Roboto', sans-serif;
+        font-weight: 700;
+        font-size: 1.5rem;
+      }
+
+      .fulltime {
+        margin-left: 20px;
+        font-family: 'Roboto', 'sans-serif';
+        visibility: visible;
+        border: #334680 solid 1px;
+        padding: 4px 8px;
+        border-radius: 0.3rem;
+        font-weight: 700;
+      }
+
+      .hidden {
+        visibility: hidden;
+      }
+    }
+
+    &__time {
+      font-family: 'Roboto', 'sans-serif';
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: start;
+      font-size: 0.8rem;
+      color: #b9bdcf;
+      margin-bottom: 20px;
+
+      svg {
+        width: 1.2rem;
+        height: 1.2rem;
+        margin-right: 10px;
+      }
+    }
+
+    &__company {
+      display: flex;
+      flex-direction: row;
+      justify-content: start;
+      align-items: center;
+      margin-bottom: 20px;
+
+      .img {
+        width: 40px;
+        height: 40px;
+        border-radius: 0.3rem;
+        box-shadow: 2px 2px 2px #0000001d;
+      }
+
+      .company__info {
+        margin-left: 10px;
+
+        &__name {
+          font-family: 'Roboto', 'sans-serif';
+          font-weight: 700;
+          margin-bottom: 8px;
+        }
+
+        &__location {
+          font-family: 'Roboto', 'sans-serif';
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          justify-content: start;
+          font-size: 0.8rem;
+          color: #b9bdcf;
+
+          svg {
+            width: 1rem;
+            height: 1rem;
+            margin-right: 5px;
+          }
+        }
+      }
+    }
+  }
+}
