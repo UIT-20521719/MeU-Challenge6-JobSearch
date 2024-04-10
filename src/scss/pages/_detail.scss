@@ -1,3 +1,5 @@
+@use '../abstract/' as *;
+
 .detail {
   width: 80%;
   display: flex;
@@ -5,8 +7,21 @@
   align-items: start;
   justify-content: start;
 
+  @include mobile {
+    width: 95%;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: start;
+  }
+
   &__sidebar {
     max-width: 250px;
+
+    @include mobile {
+      max-width: 100%;
+      margin-bottom: 40px;
+    }
 
     &__back {
       color: #1e86ff;
@@ -25,11 +40,13 @@
 
     &__contact {
       width: 95%;
+
       .contact__title {
         font-weight: 700;
         color: #b9bdcf;
         margin-bottom: 20px;
       }
+
       a {
         color: #1e86ff;
       }
@@ -42,16 +59,27 @@
       flex-direction: row;
       align-items: center;
       justify-content: flex-start;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
+
+      @include mobile {
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        justify-content: flex-start;
+      }
 
       .title {
         font-family: 'Roboto', sans-serif;
         font-weight: 700;
         font-size: 1.5rem;
+        margin-right: 20px;
+
+        @include mobile {
+          margin-bottom: 5px;
+        }
       }
 
       .fulltime {
-        margin-left: 20px;
         font-family: 'Roboto', 'sans-serif';
         visibility: visible;
         border: #334680 solid 1px;
@@ -87,7 +115,7 @@
       flex-direction: row;
       justify-content: start;
       align-items: center;
-      margin-bottom: 20px;
+      margin-bottom: 30px;
 
       .img {
         width: 40px;
@@ -119,6 +147,19 @@
             height: 1rem;
             margin-right: 5px;
           }
+        }
+      }
+    }
+
+    &__content {
+      .description {
+        margin-top: 10px;
+      }
+
+      .highlight {
+        &__title {
+          font-weight: 700;
+          margin: 20px 0;
         }
       }
     }

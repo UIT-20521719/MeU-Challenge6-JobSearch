@@ -47,5 +47,9 @@
     &__span {
       font-weight: 500;
     }
+
+    @include mobile {
+      width: 95%;
+    }
   }
 }

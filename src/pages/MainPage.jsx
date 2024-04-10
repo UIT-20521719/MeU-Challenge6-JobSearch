@@ -1,13 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import {
-  Public,
-  WorkOutline,
-  ArrowForwardIos,
-  ArrowBackIos,
-} from '@mui/icons-material';
+import { Public, WorkOutline } from '@mui/icons-material';
 import JobCard from '../components/JobCard';
 import { Link } from 'react-router-dom';
-import ReactPaginate from 'react-paginate';
+import { Pagination, Stack } from '@mui/material';
+import data from '../data';
 
 const MainPage = () => {
   // const API_ENDPOINT = 'http://localhost:3001/';
@@ -16,79 +12,79 @@ const MainPage = () => {
   const [searchbarQuery, setSearchbarQuery] = useState('');
   const [searchLocation, setSearchLocation] = useState('');
   const [isFulltime, setIsFulltime] = useState(false);
+
   const [jobsData, setJobsData] = useState([]);
-  const [offset, setOffset] = useState(10);
-  const [start, setStart] = useState(0);
+  const [searchJobsResult, setSearchJobsResult] = useState(jobsData);
 
-  // const fetchJobsData = async () => {
-  //   try {
-  //     const api = `${API_ENDPOINT}?query=${searchbarQuery} ${
-  //       isFulltime ? 'full-time' : ''
-  //     } ${searchLocation}`;
+  const [startOffset, setStartOffset] = useState(0);
+  const [displayJobs, setDisplayJobs] = useState([]);
 
-  //     const res = await fetch(api);
+  const fetchJobsData = async () => {
+    // const api = `${API_ENDPOINT}?query=${searchbarQuery} ${
+    //   isFulltime ? 'full-time' : ''
+    // } ${searchLocation}`;
+    // try {
+    //   const res = await fetch(api);
+    //   const data = await res.json();
+    //   const length = data.jobs_results.length;
 
-  //     const data = await res.json();
-  //     if (res.ok) {
-  //       setJobsData(
-  //         data.jobs_results.slice(offset % 10, (offset % 10) + itemsPerPage)
-  //       );
-  //     }
-  //   } catch (e) {
-  //     console.log(e);
-  //   }
-  // };
+    //   if (res.ok) {
+    //     const endData = [...jobsData];
+    //     for (let i = 0; i < length; i++) {
+    //       endData[startOffset + i] = data.jobs_results[i];;
+    //     }
+    //     setJobsData(endData);
+    //   }
+    // } catch (e) {
+    //   console.log(e);
+    // }
 
-  // fetch jobs whether offset or search query changed
+    /**mock data */
+    setJobsData(data);
+  };
+
   useEffect(() => {
-    setJobsData([
-      {
-        title: 'Barista',
-        company_name: 'Legacy Records',
-        location: 'New York, NY',
-        via: 'via Glassdoor',
-        description:
-          'We are seeking a Barista for our coffee counter and cafe Easy Victor...',
-        job_highlights: [
-          {
-            title: 'Qualifications',
-            items: [
-              'Candidates must be organized, hard-working, self-motivated and skilled communicators with coffee and customer service experience',
-            ],
-          },
-        ],
-        related_links: [
-          {
-            link: 'https://www.google.com/search?q=Legacy+Records&sa=X&ved=0ahUKEwimkYSu4ZP8AhXhknIEHX_jB_cQmJACCIoK',
-            text: 'See web results for Legacy Records',
-          },
-        ],
-        thumbnail:
-          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxTQTdiyx6mStWDg8POBVdtEglmrWPyZqlcsKCW-k&s',
-        extensions: ['3 days ago', 'Part-time', 'No degree mentioned'],
-        detected_extensions: {
-          posted_at: '3 days ago',
-          schedule_type: 'Full-time',
-        },
-        job_id:
-          'eyJqb2JfdGl0bGUiOiJCYXJpc3RhIiwiaHRpZG9jaWQiOiJ1ek5lRDJTU1JkZ0FBQUFBQUFBQUFBPT0iLCJmYyI6IkV1SUJDcUlCUVVGMFZteGlSR2g0TW5kNVprd3pVRE5PUWtWVExYY3dTa2hMZUdWcE1rRmhkazV6VTBOaE1tOVZZemRrZEhGa1RrSk9TRkZWVVdGeVRWZENUbU41VEVoNFNtbHBkM2hDTFdwQ2JWRnNOa2xqVTJoTWNVUlJkRU5hTWtsWGRHODFWV2xPYUVzM00yVjBNR1V0Y3pGYVNtSTBNSFZJVXkxbWEwWkNXWEZvUmtkUmFraEtURk5OWlVWNVVYUjVkWFl3Um1ocU1USlNhMFJuY1dKR2FXRkpVMDVSRWhkb1RIRnVXVFpoWDBGbFIyeDVkRTFRWHpoaFpuVkJPQm9pUVVSVmVVVkhaRTlyTkhWa1prRmZhakpYZWpkb1QwSlNTSHB6UVRSNVpHdG1RUSIsImZjdiI6IjMiLCJmY19pZCI6ImZjXzIiLCJhcHBseV9saW5rIjp7InRpdGxlIjoiQXBwbHkgb24gR2xhc3Nkb29yIiwibGluayI6Imh0dHBzOi8vd3d3LmdsYXNzZG9vci5jb20vam9iLWxpc3RpbmcvYmFyaXN0YS1sZWdhY3ktcmVjb3Jkcy1KVl9JQzExMzIzNDhfS08wLDdfS0U4LDIyLmh0bT9qbD0xMDA4MzY3NDA2MTc1XHUwMDI2dXRtX2NhbXBhaWduPWdvb2dsZV9qb2JzX2FwcGx5XHUwMDI2dXRtX3NvdXJjZT1nb29nbGVfam9ic19hcHBseVx1MDAyNnV0bV9tZWRpdW09b3JnYW5pYyJ9fQ==',
-      },
-    ]);
-    // fetchJobsData();
-  }, [offset, searchbarQuery, searchLocation, isFulltime]);
-
-  // change fetch page whether offset changed
-  useEffect(() => {
-    if (offset % 10 === 0) {
-      setStart(offset);
-    } else if (offset % 10 !== 0 && offset !== start) {
-      setStart(offset - (offset % 10) + 10);
+    if (!jobsData[startOffset]) {
+      fetchJobsData();
+    } else {
+      handleSearch();
+      setDisplayJobs(
+        searchJobsResult.slice(startOffset, startOffset + itemsPerPage)
+      );
     }
-  }, [offset]);
+  }, [startOffset, searchbarQuery, searchLocation, isFulltime]);
 
-  // pagination
-  const handlePageClick = (e) => {
-    setOffset(e.selected * itemsPerPage);
+  // render on re-fetch
+  useEffect(() => {
+    handleSearch();
+  }, [jobsData]);
+
+  useEffect(() => {
+    setDisplayJobs(
+      searchJobsResult.slice(startOffset, startOffset + itemsPerPage)
+    );
+  }, [searchJobsResult]);
+
+  const handleSearch = () => {
+    const searchJobsData = jobsData.filter((job) => {
+      const searchStr =
+        job.description.toString().toLowerCase() +
+        job.title.toString().toLowerCase() +
+        job.location.toString().toLowerCase() +
+        job.title.toString().toLowerCase() +
+        job.detected_extensions.schedule_type.toString().toLowerCase();
+
+      const q = searchbarQuery.toLowerCase();
+      const lct = searchLocation.toLowerCase();
+      if (searchStr.includes(q) && searchStr.includes(lct)) {
+        if (isFulltime) {
+          if (searchStr.includes('full-time')) return job;
+        } else {
+          return job;
+        }
+      }
+    });
+    setSearchJobsResult(searchJobsData);
   };
 
   return (
@@ -104,7 +100,9 @@ const MainPage = () => {
               setSearchbarQuery(e.target.value);
             }}
           />
-          <button type="button">Search</button>
+          <button type="button" onClick={handleSearch}>
+            Search
+          </button>
         </div>
       </div>
       <div className="container">
@@ -113,7 +111,9 @@ const MainPage = () => {
             <input
               type="checkbox"
               value={isFulltime}
-              onChange={() => setIsFulltime(!isFulltime)}
+              onChange={() => {
+                setIsFulltime(!isFulltime);
+              }}
             />
             <label>Full time</label>
           </div>
@@ -126,6 +126,11 @@ const MainPage = () => {
               value={searchLocation}
               onChange={(e) => {
                 setSearchLocation(e.target.value);
+              }}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  handleSearch();
+                }
               }}
             />
           </div>
@@ -189,8 +194,8 @@ const MainPage = () => {
           </div>
         </div>
         <div className="container__right">
-          {jobsData &&
-            jobsData.map((job) => {
+          {displayJobs.length > 0 ? (
+            displayJobs.map((job) => {
               return (
                 <div key={job.job_id}>
                   <Link
@@ -202,23 +207,26 @@ const MainPage = () => {
                   </Link>
                 </div>
               );
-            })}
-          <ReactPaginate
-            breakLabel="..."
-            nextLabel={<ArrowForwardIos />}
-            onPageChange={handlePageClick}
-            pageRangeDisplayed={5}
-            pageCount={20}
-            previousLabel={<ArrowBackIos />}
-            renderOnZeroPageCount={null}
-            containerClassName="pagination"
-            disabledClassName="disabled-page"
-            nextClassName="item next"
-            pageClassName="item pagination-page"
-            previousClassName="item previous"
-            activeClassName="item active"
-            breakClassName="item break"
-          />
+            })
+          ) : (
+            <>
+              <div className="container__right__empty">No result</div>
+            </>
+          )}
+          {searchJobsResult.length > itemsPerPage && (
+            <Stack spacing={2} alignItems="flex-end">
+              <Pagination
+                count={Math.ceil(searchJobsResult.length / 5)}
+                size="medium"
+                variant="outlined"
+                shape="rounded"
+                onChange={(e, pageNumber) => {
+                  setStartOffset((pageNumber - 1) * itemsPerPage);
+                }}
+                color="primary"
+              />
+            </Stack>
+          )}
         </div>
       </div>
     </div>

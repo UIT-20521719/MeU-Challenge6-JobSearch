@@ -66,7 +66,6 @@ const DetailPage = () => {
               {jobDetails.job_highlights.map((highlight) => {
                 return (
                   <div className="highlight">
-                    <br />
                     <p className="highlight__title">{highlight.title}</p>
                     {highlight.items.map((item) => {
                       return <div className="highlight__item">{item}</div>;

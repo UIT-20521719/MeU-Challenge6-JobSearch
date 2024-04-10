@@ -1,3 +1,5 @@
+@use '../abstract/' as *;
+
 .main {
   width: 100%;
   display: flex;
@@ -8,9 +10,20 @@
 
 .searchbar {
   background: url('../../assets/backgroundImg.png') no-repeat center;
-  background-size: 170%; // responsive
+  background-size: 100%;
   width: 80%;
   border-radius: 0.3rem;
+
+  @include tablet {
+    background-size: 175%;
+    border-radius: 0.3rem;
+  }
+
+  @include mobile {
+    background-size: 300%;
+    width: 95%;
+    border-radius: 0.3rem;
+  }
 
   &__input {
     margin: 50px 100px;
@@ -42,6 +55,10 @@
       &:focus-visible {
         outline: none;
       }
+
+      &:placeholder-shown {
+        text-overflow: ellipsis;
+      }
     }
 
     button {
@@ -65,8 +82,20 @@
   flex-direction: row;
   align-items: start;
 
+  @include mobile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    width: 95%;
+  }
+
   &__left {
     flex-grow: 1;
+
+    @include mobile {
+      width: 100%;
+    }
 
     &__checkbox {
       padding: 30px 10px 20px 10px;
@@ -118,6 +147,10 @@
         &:focus-visible {
           outline: none;
         }
+
+        &:placeholder-shown {
+          text-overflow: ellipsis;
+        }
       }
 
       svg {
@@ -150,8 +183,14 @@
 
   &__right {
     flex-grow: 4;
+    margin-top: 20px;
+
+    @include mobile {
+      width: 95%;
+    }
 
     &__job {
+      min-width: 100%;
       text-decoration: none;
       display: flex;
       flex-direction: column;
@@ -165,6 +204,20 @@
         color: inherit;
         opacity: 0.9;
       }
+
+      @include mobile {
+        align-items: center;
+      }
+    }
+
+    &__empty {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      font-size: 1.2rem;
+      font-weight: 700;
     }
   }
 }
