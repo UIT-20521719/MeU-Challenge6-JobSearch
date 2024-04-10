@@ -49,7 +49,7 @@ const DetailPage = () => {
                 src={
                   jobDetails.thumbnail
                     ? jobDetails.thumbnail
-                    : '../assets/not_found_thumbnail.png'
+                    : require('../assets/not_found_thumbnail.png')
                 }
                 alt=""
               />
